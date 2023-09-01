@@ -3,33 +3,41 @@
 return [
 
     /*
-     * You can register all the settings classes here.
+     * Each settings class used in your application must be registered, you can
+     * put them (manually) here.
      */
     'settings' => [
         App\Settings\GeneralSettings::class
     ],
 
     /*
-     * When you create a new settings migration via the `make:settings-migration`
-     * command the package will store these migrations in this directory.
+     * The path where the settings classes will be created.
      */
-    'migrations_path' => database_path('settings'),
+    'setting_class_path' => app_path('Settings'),
 
     /*
-     * When no repository was set for a settings class this repository will be
-     * used for loading and saving settings.
+     * In these directories settings migrations will be stored and ran when migrating. A settings
+     * migration created via the make:settings-migration command will be stored in the first path or
+     * a custom defined path when running the command.
+     */
+    'migrations_paths' => [
+        database_path('settings'),
+    ],
+
+    /*
+     * When no repository was set for a settings class the following repository
+     * will be used for loading and saving settings.
      */
     'default_repository' => 'database',
 
     /*
-     * Settings will be stored and loaded from these repositories. There are
-     * two types of repositories: database and Redis. But its always
-     * possible to create your specific types of repositories.
+     * Settings will be stored and loaded from these repositories.
      */
     'repositories' => [
         'database' => [
             'type' => Spatie\LaravelSettings\SettingsRepositories\DatabaseSettingsRepository::class,
             'model' => null,
+            'table' => null,
             'connection' => null,
         ],
         'redis' => [
@@ -40,14 +48,26 @@ return [
     ],
 
     /*
-     * When the package discovers a setting with a type other than the PHP built
-     * in types, it should be cast. These casts will automatically cast types
-     * when they occur in a settings class.
+     * The contents of settings classes can be cached through your application,
+     * settings will be stored within a provided Laravel store and can have an
+     * additional prefix.
+     */
+    'cache' => [
+        'enabled' => env('SETTINGS_CACHE_ENABLED', false),
+        'store' => null,
+        'prefix' => null,
+        'ttl' => null,
+    ],
+
+    /*
+     * These global casts will be automatically used whenever a property within
+     * your settings class isn't a default PHP type.
      */
     'global_casts' => [
         DateTimeInterface::class => Spatie\LaravelSettings\SettingsCasts\DateTimeInterfaceCast::class,
         DateTimeZone::class => Spatie\LaravelSettings\SettingsCasts\DateTimeZoneCast::class,
-        Spatie\DataTransferObject\DataTransferObject::class => Spatie\LaravelSettings\SettingsCasts\DtoCast::class,
+//        Spatie\DataTransferObject\DataTransferObject::class => Spatie\LaravelSettings\SettingsCasts\DtoCast::class,
+        Spatie\LaravelData\Data::class => Spatie\LaravelSettings\SettingsCasts\DataCast::class,
     ],
 
     /*
@@ -59,8 +79,8 @@ return [
     ],
 
     /*
-     * When in production, it is advised to cache the automatically discovered
-     * and registered setting classes will be cached in this path.
+     * Automatically discovered settings classes can be cached so they don't
+     * need to be searched each time the application boots up.
      */
-    'cache_path' => storage_path('app/laravel-settings'),
+    'discovered_settings_cache_path' => storage_path('app/laravel-settings'),
 ];

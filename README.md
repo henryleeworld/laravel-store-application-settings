@@ -1,4 +1,4 @@
-# Laravel 8 儲存應用程式設定
+# Laravel 10 儲存應用程式設定
 
 引入 spatie 的 laravel-settings 套件來擴增將設定儲存在資料儲存庫（資料庫、Redis 等）中，並通過應用程式輕鬆使用設定。
 
