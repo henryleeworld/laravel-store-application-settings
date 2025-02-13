@@ -7,7 +7,7 @@ return [
      * put them (manually) here.
      */
     'settings' => [
-        App\Settings\GeneralSettings::class
+
     ],
 
     /*
@@ -48,6 +48,14 @@ return [
     ],
 
     /*
+     * The encoder and decoder will determine how settings are stored and
+     * retrieved in the database. By default, `json_encode` and `json_decode`
+     * are used.
+     */
+    'encoder' => null,
+    'decoder' => null,
+
+    /*
      * The contents of settings classes can be cached through your application,
      * settings will be stored within a provided Laravel store and can have an
      * additional prefix.
@@ -75,12 +83,12 @@ return [
      * register them.
      */
     'auto_discover_settings' => [
-        app()->path(),
+        app_path('Settings'),
     ],
 
     /*
-     * Automatically discovered settings classes can be cached so they don't
+     * Automatically discovered settings classes can be cached, so they don't
      * need to be searched each time the application boots up.
      */
-    'discovered_settings_cache_path' => storage_path('app/laravel-settings'),
+    'discovered_settings_cache_path' => base_path('bootstrap/cache'),
 ];

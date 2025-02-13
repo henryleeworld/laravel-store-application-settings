@@ -8,10 +8,10 @@ class SettingsController extends Controller
 {
     public function show(GeneralSettings $settings) 
     {
-        echo '儲存前網站名稱：' . $settings->site_name . PHP_EOL;
-        $settings->site_name   = '亨利的世界';
+        echo __('Site name before saving:') . $settings->site_name . PHP_EOL;
+        $settings->site_name   = __('Henry Lee\'s World');
         $settings->site_active = true;
         $settings->save();
-        echo '儲存後網站名稱：' . $settings->site_name . PHP_EOL;
+        echo __('Site name after saving:') . $settings->site_name . PHP_EOL;
     }
 }

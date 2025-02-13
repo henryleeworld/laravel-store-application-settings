@@ -1,4 +1,4 @@
-# Laravel 10 儲存應用程式設定
+# Laravel 11 儲存應用程式設定
 
 引入 spatie 的 laravel-settings 套件來擴增將設定儲存在資料儲存庫（資料庫、Redis 等）中，並通過應用程式輕鬆使用設定。
 
@@ -26,5 +26,5 @@ $ php artisan migrate
 ----
 
 ## 畫面截圖
-![](https://i.imgur.com/MhFIOet.png)
+![](https://i.imgur.com/s8cErAa.png)
 > 已在 Laravel Container 中註冊了設定，當想在應用程式中的某處使用這些設定時，可以將設定注入
